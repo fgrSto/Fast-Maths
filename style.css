@@ -3,44 +3,168 @@
   margin: 0;
 }
 
-body {
-  height: 100vh;
+.header {
+  height: 25vh;
+  display: flex;
+  justify-content: space-between;
+  background-color: lightblue;
+}
+
+.stats {
+  margin: 1rem;
+  width: 80vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
+  background-color: lightcoral;
+}
+
+.p_stats {
+  height: 40%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-size: 2rem;
+}
+
+.p_stats > article {
+  width: 30%;
+  display: flex;
+  align-items: center;
   justify-content: center;
+  border: 0.1rem solid;
+  border-radius: 3rem;
 }
 
-header {
-  background-color: lightblue;
-  margin: 5rem;
+.b_stats {
+  height: 40%;
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  flex-direction: row;
+  justify-content: space-evenly;
   font-size: 2rem;
 }
 
-main > div {
-  background-color: lightblue;
-  margin: 5rem;
+.b_stats > article {
+  width: 40%;
   display: flex;
-  justify-content: space-around;
   align-items: center;
-  font-size: 2rem;
+  justify-content: center;
+  border: 0.1rem solid;
+  border-radius: 3rem;
 }
 
-input {
+.title {
+  margin: 2rem 1rem;
+  width: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4rem;
+  background-color: lightcoral;
+  border-radius: 5rem;
+}
+
+.main {
+  height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: lightcoral;
+}
+
+.cloack {
+  height: 60vh;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: lightblue;
+}
+
+#cloack {
+  margin-top: 2rem;
+  height: 35vh;
+  width: 35vh;
+  border-radius: 11rem;
+  background-color: lightcoral;
+}
+
+#cloack_btn {
+  margin-bottom: 4rem;
+  height: 10vh;
+  width: 30vh;
+  font-size: 4rem;
+}
+
+.calculs {
+  height: 60vh;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: lightblue;
+}
+
+.numbers {
+  height: 20vh;
+  width: 80vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: lightcoral;
+  border-radius: 6rem;
+}
+
+.numbers > article {
+  margin: 1rem;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  font-size: 5rem;
+  background-color: lightblue;
+  border-radius: 2rem;
+}
+
+#answer {
+  height: 10vh;
+  width: 40vh;
+  font-size: 3rem;
+  text-align: center;
+}
+
+.life {
+  height: 60vh;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: lightblue;
+}
+
+#health {
+  margin: 0rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: lightcoral;
+}
+
+#health > img {
+  margin: 0.5rem;
+  padding: 0.5rem;
   height: 5rem;
-  width: 15rem;
-  font-size: 2rem;
 }
 
-button {
-  height: 5rem;
-  width: 10rem;
-  font-size: 2rem;
-}
-
-.hidden {
-  visibility: hidden;
-  position: absolute;
+.difficulty {
+  margin: 5rem 0rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  background-color: lightcoral;
 }

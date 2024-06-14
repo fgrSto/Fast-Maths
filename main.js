@@ -3,6 +3,8 @@
 const _score = document.getElementById("score");
 const _bestScore = document.getElementById("b_score");
 const _streak = document.getElementById("streak");
+const _bestStreak = document.getElementById("b_streak");
+const _level = document.getElementById("level");
 
 const _number1 = document.getElementById("number1");
 const _number2 = document.getElementById("number2");
@@ -31,6 +33,7 @@ let playerAnswer = null;
 
 let result = false;
 let multiplicator = 1;
+let cloack = null;
 
 //#endregion
 
@@ -46,6 +49,7 @@ function Init() {
   playerAnswer = null;
   result = false;
   multiplicator = 1;
+  cloack = 0;
 
   _score.innerHTML = "Score : " + score;
   _bestScore.innerHTML = "Best Score : " + bestScore;
@@ -76,7 +80,7 @@ function CheckAnswer() {
 // Manage all scoring systeme
 function Scoring() {
   if (result == true) {
-    score = score + 1;
+    score += multiplicator;
     streak += 1;
   }
   if (result == false) {
@@ -101,10 +105,18 @@ function Estatic() {
   }
 }
 
+function Cloack() {
+  cloack = 2;
+  setTimeout(() => {
+    console.log("test");
+  }, cloack * 1000);
+}
+
 // Executing functions
 Init();
 Calculs();
 Estatic();
+Cloack();
 
 // Execute function when player give answer
 _button.addEventListener("click", (e) => {
@@ -113,3 +125,5 @@ _button.addEventListener("click", (e) => {
   Estatic();
   _playerAnswer.value = null;
 });
+
+//EventListener"input"(entrer) -> valide la réponse

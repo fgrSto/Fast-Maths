@@ -8,32 +8,57 @@
   </head>
 
   <body>
-    <header>
-      <div>
-        <h2 id="score">Score : X</h2>
-        <h2 id="b_score">Best Score : X</h2>
+    <header class="header">
+      <div class="stats">
+        <div class="p_stats">
+          <article><p id="score">Score : X</p></article>
+          <article><p id="streak">Streak : X</p></article>
+          <article><p id="level">Level : X</p></article>
+        </div>
+        <div class="b_stats">
+          <article><p id="b_score">Best Score : XXX</p></article>
+          <article><p id="b_streak">Best Streak : XX</p></article>
+        </div>
       </div>
-      <h1>Fast Maths</h1>
-      <div>
-        <h2 id="streak">Streak : X</h2>
-        <h2 id="b_streak">Best Streak : X</h2>
+      <div class="title">
+        <h1>Fast Maths</h1>
       </div>
     </header>
 
-    <main>
-      <div>
-        <h2 id="number1">number 1</h2>
-        <h2 id="sign1">+</h2>
-        <h2 id="number2">number 2</h2>
-        <h2 id="sign2">+</h2>
-        <h2 id="number3">number 3</h2>
+    <main class="main">
+      <div class="cloack">
+        <div id="cloack"></div>
+        <button id="cloack_btn">Restart</button>
       </div>
-      <div>
-        <input type="text" id="answer" />
-        <button id="submit">Submit</button>
+      <div class="calculs">
+        <div class="numbers">
+          <article id="number1"><p>100</p></article>
+          <article id="sign1"><p>+</p></article>
+          <article id="number2"><p>200</p></article>
+          <article id="sign2"><p>-</p></article>
+          <article id="number3"><p>300</p></article>
+        </div>
+        <input type="text" id="answer" placeholder="35 542" />
       </div>
-
-      <script src="main.js"></script>
+      <div class="life">
+        <div id="health">
+          <img src="/img/IMG_blueHeart.png" alt="heart" />
+          <img src="/img/IMG_blueHeart.png" alt="heart" />
+          <img src="/img/IMG_blueHeart.png" alt="heart" />
+          <img src="/img/IMG_blueHeart.png" alt="heart" />
+          <img src="/img/IMG_blueHeart.png" alt="heart" />
+        </div>
+        <p class="difficulty">Difficulty</p>
+        <!--
+        <p class="difficulty">Basic</p>
+        <p class="difficulty">Easy</p>
+        <p class="difficulty">Normal</p>
+        <p class="difficulty">Difficulty</p>
+        <p class="difficulty">Engineer</p>
+        -->
+      </div>
     </main>
+
+    <!-- <script src="main.js"></script> -->
   </body>
 </html>
