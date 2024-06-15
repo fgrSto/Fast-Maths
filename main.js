@@ -182,18 +182,53 @@ function Level() {
   switch (level) {
     case 1:
       _difficulty.innerHTML = "Basic";
+      /*
+      Addition or substraction of 2 numbers
+      3 digit numbers max
+      No multiplication
+      Always a positive result
+      */
       break;
     case 2:
       _difficulty.innerHTML = "Easy";
+      /*
+      Addition or substraction of 2 or 3 numbers
+      3 digit numbers max
+      No multiplication
+      Result can be positive or negative
+      */
       break;
     case 3:
       _difficulty.innerHTML = "Normal";
+      /*
+      Addition or substraction of 2 or 3 numbers
+      3 digit numbers max
+      Multiplication of 2 digit numbers max
+      Multiplication of 2 numbers
+      Multiplication and addition or substraction not allowed
+      Result can be positive or negative
+      */
       break;
     case 4:
       _difficulty.innerHTML = "Hard";
+      /*
+      Addition or substraction of 3 numbers
+      4 digit numbers max
+      Multiplication only 2 digit numbers
+      Multiplication of 2 numbers
+      Multiplication and addition or substraction allowed
+      Result can be positive or negative
+      */
       break;
     case 5:
       _difficulty.innerHTML = "Engineer";
+      /*
+      Addition or substraction 3 numbers
+      Addition and substraction with 3 or 4 digit numbers only
+      Multiplication with 2 or 3 digit numbers
+      Multiplication and addition or substraction allowed
+      Result can be positive or negative
+      */
       break;
   }
 }
