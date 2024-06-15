@@ -40,11 +40,11 @@ let sign2 = null;
 let answer = null;
 let playerAnswer = null;
 
-let health = null;
 let difficulty = null;
 
 let result = null;
-let multiplicator = null;
+let healthMultiplicator = null;
+let difficultyMultiplicator = null;
 
 //#endregion
 
@@ -57,7 +57,7 @@ function Calculs() {
   sign1 = Math.floor(Math.random() * 2);
   sign2 = Math.floor(Math.random() * 2);
 
-  switch (level) {
+  switch (difficulty) {
     case 1:
       isnumber3 = 0;
       if (sign1 == 0) {
@@ -367,18 +367,41 @@ function CheckAnswer() {
 
 // Manage all scoring systeme
 function Scoring() {
-  //Score = score + (1 * multiHP * multiDif)
-  //Bscore
-  //Streak
-  //Bstrek
-  //level = streak - 1
+  if (result == true) {
+    score = score + (1 * healthMultiplicator + difficultyMultiplicator);
+    streak++;
+    level = Math.floor(streak / 10 + 1);
+    //Add lifeblood
+    _score.innerHTML = "Score : " + score;
+    _streak.innerHTML = "Streak : " + streak;
+    _level.innerHTML = "Level : " + level;
+  }
+  if (result == false) {
+    if (bestScore < score) {
+      bestScore = score;
+    }
+    if (bestStreak < streak) {
+      bestStreak = streak;
+    }
+
+    score = 0;
+    streak = 0;
+    level = 0;
+
+    _score.innerHTML = "Score : " + score;
+    _bestScore.innerHTML = "Best Score : " + bestScore;
+    _streak.innerHTML = "Streak : " + streak;
+    _bestStreak.innerHTML = "Best Streak : " + bestStreak;
+    _level.innerHTML = "Level : " + level;
+  }
 }
 
-function Level() {
-  level = 5;
-  switch (level) {
+function Difficulty() {
+  difficulty = 3;
+  switch (difficulty) {
     case 1:
       _difficulty.innerHTML = "Basic";
+      difficultyMultiplicator = 1;
       /*
       Addition or substraction of 2 numbers
       3 digit numbers max
@@ -388,6 +411,7 @@ function Level() {
       break;
     case 2:
       _difficulty.innerHTML = "Easy";
+      difficultyMultiplicator = 3;
       /*
       Addition or substraction of 2 or 3 numbers
       3 digit numbers max
@@ -397,6 +421,7 @@ function Level() {
       break;
     case 3:
       _difficulty.innerHTML = "Normal";
+      difficultyMultiplicator = 5;
       /*
       Addition or substraction of 2 or 3 numbers
       3 digit numbers max
@@ -408,6 +433,7 @@ function Level() {
       break;
     case 4:
       _difficulty.innerHTML = "Hard";
+      difficultyMultiplicator = 8;
       /*
       Addition or substraction of 3 numbers
       4 digit numbers max
@@ -419,6 +445,7 @@ function Level() {
       break;
     case 5:
       _difficulty.innerHTML = "Engineer";
+      difficultyMultiplicator = 10;
       /*
       Addition or substraction 3 numbers
       Addition and substraction with 2, 3 or 4 digit numbers only
@@ -430,12 +457,46 @@ function Level() {
   }
 }
 
-Level();
+function Init() {
+  score = 0;
+  bestScore = 0;
+  streak = 0;
+  bestStreak = 0;
+  level = 0;
+
+  number1 = 0;
+  number2 = 0;
+  number3 = 0;
+  isnumber3 = 0;
+  sign1 = 0;
+  sign2 = 0;
+
+  answer = 0;
+  playerAnswer = null;
+
+  difficulty = 0;
+
+  result = 0;
+  healthMultiplicator = 1;
+  difficultyMultiplicator = 0;
+
+  _score.innerHTML = "Score : " + score;
+  _bestScore.innerHTML = "Best Score : " + bestScore;
+  _streak.innerHTML = "Streak : " + streak;
+  _bestStreak.innerHTML = "Best Streak : " + bestStreak;
+  _level.innerHTML = "Level : " + level;
+}
+
+Init();
+Difficulty();
 Calculs();
 
 // Execute function when player give answer
 _playerAnswer.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
-    CheckAnswer;
+    CheckAnswer();
+    Scoring();
+    Calculs();
+    _playerAnswer.value = null;
   }
 });
