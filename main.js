@@ -74,9 +74,6 @@ function Calculs() {
       break;
 
     case 2:
-      break;
-
-    case 3:
       isnumber3 = Math.floor(Math.random() * 2);
       if (isnumber3 == 0) {
         if (sign1 == 1) {
@@ -106,10 +103,219 @@ function Calculs() {
       }
       break;
 
+    case 3:
+      sign1 = Math.floor(Math.random() * 3);
+      if (sign1 == 0) {
+        isnumber3 = Math.floor(Math.random() * 2);
+        if (isnumber3 == 0) {
+          answer = number1 - number2;
+        }
+        if (isnumber3 == 1) {
+          if (sign2 == 0) {
+            answer = number1 - number2 - number3;
+          }
+          if (sign2 == 1) {
+            answer = number1 - number2 + number3;
+          }
+        }
+      }
+      if (sign1 == 1) {
+        isnumber3 = Math.floor(Math.random() * 2);
+        if (isnumber3 == 0) {
+          answer = number1 + number2;
+        }
+        if (isnumber3 == 1) {
+          if (sign2 == 0) {
+            answer = number1 + number2 - number3;
+          }
+          if (sign2 == 1) {
+            answer = number1 + number2 + number3;
+          }
+        }
+      }
+      if (sign1 == 2) {
+        isnumber3 = 0;
+        answer = number1 * number2;
+      }
+      break;
+
     case 4:
+      sign1 = Math.floor(Math.random() * 3);
+      sign2 = Math.floor(Math.random() * 3);
+
+      if (sign1 == 0) {
+        if (sign2 == 0) {
+          number1 = Math.floor(Math.random() * 1000);
+          number2 = Math.floor(Math.random() * 1000);
+          number3 = Math.floor(Math.random() * 1000);
+          answer = number1 - number2 - number3;
+        }
+        if (sign2 == 1) {
+          number1 = Math.floor(Math.random() * 1000);
+          number2 = Math.floor(Math.random() * 1000);
+          number3 = Math.floor(Math.random() * 1000);
+          answer = number1 - number2 + number3;
+        }
+        if (sign2 == 2) {
+          number1 = Math.floor(Math.random() * 1000);
+          answer = number1 - number2 * number3;
+        }
+      }
+      if (sign1 == 1) {
+        if (sign2 == 0) {
+          number1 = Math.floor(Math.random() * 1000);
+          number2 = Math.floor(Math.random() * 1000);
+          number3 = Math.floor(Math.random() * 1000);
+          answer = number1 + number2 - number3;
+        }
+        if (sign2 == 1) {
+          number1 = Math.floor(Math.random() * 1000);
+          number2 = Math.floor(Math.random() * 1000);
+          number3 = Math.floor(Math.random() * 1000);
+          answer = number1 + number2 + number3;
+        }
+        if (sign2 == 2) {
+          number1 = Math.floor(Math.random() * 1000);
+          answer = number1 + number2 * number3;
+        }
+      }
+      if (sign1 == 2) {
+        if (sign2 == 0) {
+          number3 = Math.floor(Math.random() * 1000);
+          answer = number1 * number2 - number3;
+        }
+        if (sign2 == 1) {
+          number3 = Math.floor(Math.random() * 1000);
+          answer = number1 * number2 + number3;
+        }
+        if (sign2 == 2) {
+          isnumber3 = 0;
+          answer = number1 * number2;
+        }
+      }
       break;
 
     case 5:
+      sign1 = Math.floor(Math.random() * 3);
+      sign2 = Math.floor(Math.random() * 3);
+      number1 = 0;
+      number2 = 0;
+      number3 = 0;
+
+      if (sign1 == 0) {
+        if (sign2 == 0) {
+          while (number1 < 100) {
+            number1 = Math.floor(Math.random() * 1000);
+          }
+          while (number2 < 100) {
+            number2 = Math.floor(Math.random() * 1000);
+          }
+          while (number3 < 100) {
+            number3 = Math.floor(Math.random() * 1000);
+          }
+          answer = number1 - number2 - number3;
+        }
+        if (sign2 == 1) {
+          while (number1 < 100) {
+            number1 = Math.floor(Math.random() * 1000);
+          }
+          while (number2 < 100) {
+            number2 = Math.floor(Math.random() * 1000);
+          }
+          while (number3 < 100) {
+            number3 = Math.floor(Math.random() * 1000);
+          }
+          answer = number1 - number2 + number3;
+        }
+        if (sign2 == 2) {
+          while (number1 < 100) {
+            number1 = Math.floor(Math.random() * 1000);
+          }
+          while (number2 < 10) {
+            number2 = Math.floor(Math.random() * 100);
+          }
+          while (number3 < 10) {
+            number3 = Math.floor(Math.random() * 100);
+          }
+          answer = number1 - number2 * number3;
+        }
+      }
+      if (sign1 == 1) {
+        if (sign2 == 0) {
+          while (number1 < 100) {
+            number1 = Math.floor(Math.random() * 1000);
+          }
+          while (number2 < 100) {
+            number2 = Math.floor(Math.random() * 1000);
+          }
+          while (number3 < 100) {
+            number3 = Math.floor(Math.random() * 1000);
+          }
+          answer = number1 + number2 - number3;
+        }
+        if (sign2 == 1) {
+          while (number1 < 100) {
+            number1 = Math.floor(Math.random() * 1000);
+          }
+          while (number2 < 100) {
+            number2 = Math.floor(Math.random() * 1000);
+          }
+          while (number3 < 100) {
+            number3 = Math.floor(Math.random() * 1000);
+          }
+          answer = number1 + number2 + number3;
+        }
+        if (sign2 == 2) {
+          while (number1 < 100) {
+            number1 = Math.floor(Math.random() * 1000);
+          }
+          while (number2 < 10) {
+            number2 = Math.floor(Math.random() * 100);
+          }
+          while (number3 < 10) {
+            number3 = Math.floor(Math.random() * 100);
+          }
+          answer = number1 + number2 * number3;
+        }
+      }
+      if (sign1 == 2) {
+        if (sign2 == 0) {
+          while (number1 < 10) {
+            number1 = Math.floor(Math.random() * 100);
+          }
+          while (number2 < 10) {
+            number2 = Math.floor(Math.random() * 100);
+          }
+          while (number3 < 100) {
+            number3 = Math.floor(Math.random() * 1000);
+          }
+          answer = number1 * number2 - number3;
+        }
+        if (sign2 == 1) {
+          while (number1 < 10) {
+            number1 = Math.floor(Math.random() * 100);
+          }
+          while (number2 < 10) {
+            number2 = Math.floor(Math.random() * 100);
+          }
+          while (number3 < 100) {
+            number3 = Math.floor(Math.random() * 1000);
+          }
+          answer = number1 * number2 + number3;
+        }
+        if (sign2 == 2) {
+          while (number1 < 10) {
+            number1 = Math.floor(Math.random() * 100);
+          }
+          while (number2 < 10) {
+            number2 = Math.floor(Math.random() * 100);
+          }
+          while (number3 < 10) {
+            number3 = Math.floor(Math.random() * 100);
+          }
+          answer = number1 * number2 * number3;
+        }
+      }
       break;
   }
 
@@ -126,20 +332,23 @@ function Calculs() {
     _sign2.classList.remove("hidden");
   }
 
-  if (sign1 == 1) {
-    _sign1.innerHTML = "+";
-  }
   if (sign1 == 0) {
     _sign1.innerHTML = "-";
+  }
+  if (sign1 == 1) {
+    _sign1.innerHTML = "+";
   }
   if (sign1 == 2) {
     _sign1.innerHTML = "*";
   }
+  if (sign2 == 0) {
+    _sign2.innerHTML = "-";
+  }
   if (sign2 == 1) {
     _sign2.innerHTML = "+";
   }
-  if (sign2 == 0) {
-    _sign2.innerHTML = "-";
+  if (sign2 == 2) {
+    _sign2.innerHTML = "*";
   }
 
   console.log("answer for calcul n°" + (streak + 1) + " = " + answer);
@@ -158,27 +367,15 @@ function CheckAnswer() {
 
 // Manage all scoring systeme
 function Scoring() {
-  if (result == true) {
-    score += multiplicator;
-    streak += 1;
-  }
-  if (result == false) {
-    if (score > bestScore) {
-      bestScore = score;
-    }
-    score = 0;
-    streak = 0;
-  }
-
-  _score.innerHTML = "Score : " + score;
-  _bestScore.innerHTML = "Best Score : " + bestScore;
-  _streak.innerHTML = "Streak : " + streak;
-
-  Calculs();
+  //Score = score + (1 * multiHP * multiDif)
+  //Bscore
+  //Streak
+  //Bstrek
+  //level = streak - 1
 }
 
 function Level() {
-  level = 1;
+  level = 5;
   switch (level) {
     case 1:
       _difficulty.innerHTML = "Basic";
@@ -224,7 +421,7 @@ function Level() {
       _difficulty.innerHTML = "Engineer";
       /*
       Addition or substraction 3 numbers
-      Addition and substraction with 3 or 4 digit numbers only
+      Addition and substraction with 2, 3 or 4 digit numbers only
       Multiplication with 2 or 3 digit numbers
       Multiplication and addition or substraction allowed
       Result can be positive or negative
