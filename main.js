@@ -41,10 +41,12 @@ let answer = null;
 let playerAnswer = null;
 
 let difficulty = null;
+let baseHealth = null;
+let health = null;
+let bonusHealth = null;
 
 let result = null;
 let healthMultiplicator = null;
-let difficultyMultiplicator = null;
 
 //#endregion
 
@@ -198,6 +200,7 @@ function Calculs() {
     case 5:
       sign1 = Math.floor(Math.random() * 3);
       sign2 = Math.floor(Math.random() * 3);
+      isnumber3 = 1
       number1 = 0;
       number2 = 0;
       number3 = 0;
@@ -351,7 +354,7 @@ function Calculs() {
     _sign2.innerHTML = "*";
   }
 
-  console.log("answer for calcul n°" + (streak + 1) + " = " + answer);
+  console.log("answer for calcul n°" + level + " = " + answer);
 }
 
 // Check if the answer is right
@@ -368,40 +371,43 @@ function CheckAnswer() {
 // Manage all scoring systeme
 function Scoring() {
   if (result == true) {
-    score = score + (1 * healthMultiplicator + difficultyMultiplicator);
+    score = score + (1 * healthMultiplicator * difficulty);
     streak++;
-    level = Math.floor(streak / 10 + 1);
+    level++;
     //Add lifeblood
     _score.innerHTML = "Score : " + score;
     _streak.innerHTML = "Streak : " + streak;
     _level.innerHTML = "Level : " + level;
   }
   if (result == false) {
-    if (bestScore < score) {
-      bestScore = score;
+    if (health == 0) {
+      if (bestScore < score) {
+        bestScore = score;
+      }
+
+      score = 0;
+      level = 0;
+
+      _score.innerHTML = "Score : " + score;
+      _bestScore.innerHTML = "Best Score : " + bestScore;
+      _level.innerHTML = "Level : " + level;
     }
+
     if (bestStreak < streak) {
       bestStreak = streak;
     }
 
-    score = 0;
     streak = 0;
-    level = 0;
 
-    _score.innerHTML = "Score : " + score;
-    _bestScore.innerHTML = "Best Score : " + bestScore;
     _streak.innerHTML = "Streak : " + streak;
     _bestStreak.innerHTML = "Best Streak : " + bestStreak;
-    _level.innerHTML = "Level : " + level;
   }
 }
 
 function Difficulty() {
-  difficulty = 3;
   switch (difficulty) {
     case 1:
       _difficulty.innerHTML = "Basic";
-      difficultyMultiplicator = 1;
       /*
       Addition or substraction of 2 numbers
       3 digit numbers max
@@ -411,7 +417,6 @@ function Difficulty() {
       break;
     case 2:
       _difficulty.innerHTML = "Easy";
-      difficultyMultiplicator = 3;
       /*
       Addition or substraction of 2 or 3 numbers
       3 digit numbers max
@@ -421,7 +426,6 @@ function Difficulty() {
       break;
     case 3:
       _difficulty.innerHTML = "Normal";
-      difficultyMultiplicator = 5;
       /*
       Addition or substraction of 2 or 3 numbers
       3 digit numbers max
@@ -433,7 +437,6 @@ function Difficulty() {
       break;
     case 4:
       _difficulty.innerHTML = "Hard";
-      difficultyMultiplicator = 8;
       /*
       Addition or substraction of 3 numbers
       4 digit numbers max
@@ -445,7 +448,6 @@ function Difficulty() {
       break;
     case 5:
       _difficulty.innerHTML = "Engineer";
-      difficultyMultiplicator = 10;
       /*
       Addition or substraction 3 numbers
       Addition and substraction with 2, 3 or 4 digit numbers only
@@ -457,12 +459,48 @@ function Difficulty() {
   }
 }
 
+function Health() {
+  if (result == false) {
+    if (bonusHealth == 0) {
+      health--;
+    }
+    if (bonusHealth > 0) {
+      bonusHealth--;
+    }
+  }
+  if ((streak + 1) % 10 == 0) {
+    bonusHealth++;
+  }
+  if (health + bonusHealth > baseHealth) {
+    bonusHealth--;
+  }
+
+  healthMultiplicator = 6 - baseHealth;
+
+  for (let i = 5; i > health; i--) {
+    _health.children[i - 1].classList.remove("redHeart");
+    _health.children[i - 1].classList.remove("blueHeart");
+    _health.children[i - 1].classList.add("whiteHeart");
+  }
+  for (let i = 0; i < health + bonusHealth; i++) {
+    _health.children[i].classList.add("blueHeart");
+  }
+  for (let i = 0; i < health; i++) {
+    _health.children[i].classList.add("redHeart");
+  }
+  for (let i = 5; i > baseHealth; i--) {
+    _health.children[i - 1].classList.remove("whiteHeart");
+    _health.children[i - 1].classList.remove("redHeart");
+    _health.children[i - 1].classList.add("darkHeart");
+  }
+}
+
 function Init() {
   score = 0;
   bestScore = 0;
   streak = 0;
   bestStreak = 0;
-  level = 0;
+  level = 1;
 
   number1 = 0;
   number2 = 0;
@@ -474,11 +512,13 @@ function Init() {
   answer = 0;
   playerAnswer = null;
 
-  difficulty = 0;
+  difficulty = 2;
+  baseHealth = 3;
+  health = baseHealth;
+  bonusHealth = 0;
 
-  result = 0;
+  result = null;
   healthMultiplicator = 1;
-  difficultyMultiplicator = 0;
 
   _score.innerHTML = "Score : " + score;
   _bestScore.innerHTML = "Best Score : " + bestScore;
@@ -488,6 +528,7 @@ function Init() {
 }
 
 Init();
+Health();
 Difficulty();
 Calculs();
 
@@ -495,6 +536,7 @@ Calculs();
 _playerAnswer.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     CheckAnswer();
+    Health();
     Scoring();
     Calculs();
     _playerAnswer.value = null;

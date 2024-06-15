@@ -152,10 +152,25 @@
   background-color: lightcoral;
 }
 
-#health > img {
+#health > div {
   margin: 0.5rem;
   padding: 0.5rem;
   height: 5rem;
+  width: 5rem;
+  background-color: lightblue;
+}
+
+.darkHeart {
+  background: url(/img/IMG_darkHeart.png) no-repeat center/cover;
+}
+.whiteHeart {
+  background: url(/img/IMG_whiteHeart.png) no-repeat center/cover;
+}
+.blueHeart {
+  background: url(/img/IMG_blueHeart.png) no-repeat center/cover;
+}
+.redHeart {
+  background: url(/img/IMG_redHeart.png) no-repeat center/cover;
 }
 
 #difficulty {
