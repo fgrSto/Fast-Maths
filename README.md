@@ -7,3 +7,5 @@ So this is my version of this game, with more time and more resources.
 If you like doing quick maths and you have some time, you can try it and send me feedback.
 
 I dedicate this repository to my friend, Philippe (he's not dead, we've just took different path)
+
+/!\ This project is still in work /!\

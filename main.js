@@ -17,8 +17,9 @@ const _playerAnswer = document.getElementById("answer");
 const _health = document.getElementById("health");
 const _difficulty = document.getElementById("difficulty");
 
-const _cloack = document.getElementById("cloak");
-const _cloackBtn = document.getElementById("cloack_btn");
+const _clock = document.getElementById("clock");
+const _clockBtn = document.getElementById("clock_btn");
+const _needle = document.getElementById("needle");
 
 //#endregion
 
@@ -45,21 +46,28 @@ let baseHealth = null;
 let health = null;
 let bonusHealth = null;
 
+let clockOn = null;
+
 let result = null;
 let healthMultiplicator = null;
 
 //#endregion
 
-// Calculate
+//#region Maths
+
 function Calculs() {
+  // Set number in a random number between 0 and 100
   number1 = Math.floor(Math.random() * 100);
   number2 = Math.floor(Math.random() * 100);
   number3 = Math.floor(Math.random() * 100);
 
+  // Set randomly the signs
   sign1 = Math.floor(Math.random() * 2);
   sign2 = Math.floor(Math.random() * 2);
 
+  // Make action depending of the difficulty
   switch (difficulty) {
+    // Basic
     case 1:
       isnumber3 = 0;
       if (sign1 == 0) {
@@ -75,6 +83,7 @@ function Calculs() {
       }
       break;
 
+    // Easy
     case 2:
       isnumber3 = Math.floor(Math.random() * 2);
       if (isnumber3 == 0) {
@@ -105,6 +114,7 @@ function Calculs() {
       }
       break;
 
+    // Medium
     case 3:
       sign1 = Math.floor(Math.random() * 3);
       if (sign1 == 0) {
@@ -141,6 +151,7 @@ function Calculs() {
       }
       break;
 
+    // Hard
     case 4:
       sign1 = Math.floor(Math.random() * 3);
       sign2 = Math.floor(Math.random() * 3);
@@ -197,10 +208,11 @@ function Calculs() {
       }
       break;
 
+    // Engineer
     case 5:
       sign1 = Math.floor(Math.random() * 3);
       sign2 = Math.floor(Math.random() * 3);
-      isnumber3 = 1
+      isnumber3 = 1;
       number1 = 0;
       number2 = 0;
       number3 = 0;
@@ -322,6 +334,7 @@ function Calculs() {
       break;
   }
 
+  // Display information
   _number1.innerHTML = number1;
   _number2.innerHTML = number2;
   _number3.innerHTML = number3;
@@ -354,10 +367,14 @@ function Calculs() {
     _sign2.innerHTML = "*";
   }
 
+  // Log all answers (will be change when finished)
   console.log("answer for calcul n°" + level + " = " + answer);
 }
 
-// Check if the answer is right
+//#endregion
+
+//#region Checking answer
+
 function CheckAnswer() {
   playerAnswer = _playerAnswer.value;
   if (answer == playerAnswer) {
@@ -368,18 +385,26 @@ function CheckAnswer() {
   }
 }
 
-// Manage all scoring systeme
+//#endregion
+
+//#region Scoring
+
 function Scoring() {
+  // If correct result, the score increase
   if (result == true) {
-    score = score + (1 * healthMultiplicator * difficulty);
+    score = score + 1 * healthMultiplicator * difficulty;
+
     streak++;
     level++;
-    //Add lifeblood
+
     _score.innerHTML = "Score : " + score;
     _streak.innerHTML = "Streak : " + streak;
     _level.innerHTML = "Level : " + level;
   }
+
+  // If wrong result, check the HP
   if (result == false) {
+    // If no more HP, set the best score and reset all other stats
     if (health == 0) {
       if (bestScore < score) {
         bestScore = score;
@@ -393,6 +418,7 @@ function Scoring() {
       _level.innerHTML = "Level : " + level;
     }
 
+    // Reset the streak
     if (bestStreak < streak) {
       bestStreak = streak;
     }
@@ -404,79 +430,34 @@ function Scoring() {
   }
 }
 
-function Difficulty() {
-  switch (difficulty) {
-    case 1:
-      _difficulty.innerHTML = "Basic";
-      /*
-      Addition or substraction of 2 numbers
-      3 digit numbers max
-      No multiplication
-      Always a positive result
-      */
-      break;
-    case 2:
-      _difficulty.innerHTML = "Easy";
-      /*
-      Addition or substraction of 2 or 3 numbers
-      3 digit numbers max
-      No multiplication
-      Result can be positive or negative
-      */
-      break;
-    case 3:
-      _difficulty.innerHTML = "Normal";
-      /*
-      Addition or substraction of 2 or 3 numbers
-      3 digit numbers max
-      Multiplication of 2 digit numbers max
-      Multiplication of 2 numbers
-      Multiplication and addition or substraction not allowed
-      Result can be positive or negative
-      */
-      break;
-    case 4:
-      _difficulty.innerHTML = "Hard";
-      /*
-      Addition or substraction of 3 numbers
-      4 digit numbers max
-      Multiplication only 2 digit numbers
-      Multiplication of 2 numbers
-      Multiplication and addition or substraction allowed
-      Result can be positive or negative
-      */
-      break;
-    case 5:
-      _difficulty.innerHTML = "Engineer";
-      /*
-      Addition or substraction 3 numbers
-      Addition and substraction with 2, 3 or 4 digit numbers only
-      Multiplication with 2 or 3 digit numbers
-      Multiplication and addition or substraction allowed
-      Result can be positive or negative
-      */
-      break;
-  }
-}
+//#endregion
+
+//#region Health
 
 function Health() {
+  // If the result is wrong, loose a hp
   if (result == false) {
+    // If no bonus hp, loose a hp
     if (bonusHealth == 0) {
       health--;
     }
+    // If bonus hp, loose one
     if (bonusHealth > 0) {
       bonusHealth--;
     }
   }
+  // Every 10 correct result in a row, gain a bonus hp
   if ((streak + 1) % 10 == 0) {
     bonusHealth++;
   }
+  // Can't exceed max hp
   if (health + bonusHealth > baseHealth) {
     bonusHealth--;
   }
 
   healthMultiplicator = 6 - baseHealth;
 
+  // Display the hearts
   for (let i = 5; i > health; i--) {
     _health.children[i - 1].classList.remove("redHeart");
     _health.children[i - 1].classList.remove("blueHeart");
@@ -494,6 +475,73 @@ function Health() {
     _health.children[i - 1].classList.add("darkHeart");
   }
 }
+
+//#endregion
+
+//#region Difficulty
+
+function Difficulty() {
+  switch (difficulty) {
+    case 1:
+      _difficulty.innerHTML = "Basic";
+      /*
+      Addition or substraction of 2 numbers
+      3 digit numbers max
+      No multiplication
+      Always a positive result
+      */
+      break;
+
+    case 2:
+      _difficulty.innerHTML = "Easy";
+      /*
+      Addition or substraction of 2 or 3 numbers
+      3 digit numbers max
+      No multiplication
+      Result can be positive or negative
+      */
+      break;
+
+    case 3:
+      _difficulty.innerHTML = "Normal";
+      /*
+      Addition or substraction of 2 or 3 numbers
+      3 digit numbers max
+      Multiplication of 2 digit numbers max
+      Multiplication of 2 numbers
+      Multiplication and addition or substraction not allowed
+      Result can be positive or negative
+      */
+      break;
+
+    case 4:
+      _difficulty.innerHTML = "Hard";
+      /*
+      Addition or substraction of 3 numbers
+      4 digit numbers max
+      Multiplication only 2 digit numbers
+      Multiplication of 2 numbers
+      Multiplication and addition or substraction allowed
+      Result can be positive or negative
+      */
+      break;
+
+    case 5:
+      _difficulty.innerHTML = "Engineer";
+      /*
+      Addition or substraction 3 numbers
+      Addition and substraction with 2, 3 or 4 digit numbers only
+      Multiplication with 2 or 3 digit numbers
+      Multiplication and addition or substraction allowed
+      Result can be positive or negative
+      */
+      break;
+  }
+}
+
+//#endregion
+
+//#region Init
 
 function Init() {
   score = 0;
@@ -520,6 +568,8 @@ function Init() {
   result = null;
   healthMultiplicator = 1;
 
+  clockOn = false;
+
   _score.innerHTML = "Score : " + score;
   _bestScore.innerHTML = "Best Score : " + bestScore;
   _streak.innerHTML = "Streak : " + streak;
@@ -532,13 +582,17 @@ Health();
 Difficulty();
 Calculs();
 
+//#endregion
+
 // Execute function when player give answer
-_playerAnswer.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") {
+_playerAnswer.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
     CheckAnswer();
     Health();
     Scoring();
     Calculs();
+
+    result = null;
     _playerAnswer.value = null;
   }
 });

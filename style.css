@@ -72,7 +72,7 @@
   background-color: lightcoral;
 }
 
-.cloack {
+.clock {
   height: 60vh;
   width: 20%;
   display: flex;
@@ -82,15 +82,25 @@
   background-color: lightblue;
 }
 
-#cloack {
+#clock {
   margin-top: 2rem;
   height: 35vh;
   width: 35vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 11rem;
   background-color: lightcoral;
 }
 
-#cloack_btn {
+#needle {
+  background-color: black;
+  height: 35vh;
+  width: 1vh;
+  border-radius: 1rem;
+}
+
+#clock_btn {
   margin-bottom: 4rem;
   height: 10vh;
   width: 30vh;
