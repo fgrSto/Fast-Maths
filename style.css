@@ -101,11 +101,7 @@
 }
 
 .rotate {
-  animation: rotation 10s linear 0s infinite normal none running;
-}
-
-.stopRotate {
-  animation: rotation 10s linear 0s infinite normal none paused;
+  animation: rotation 30s linear 0s infinite normal none running;
 }
 
 @keyframes rotation {

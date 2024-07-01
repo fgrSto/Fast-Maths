@@ -47,6 +47,7 @@ let health = null;
 let bonusHealth = null;
 
 let clock = null;
+let clockMultiplicator = null;
 
 let result = null;
 let healthMultiplicator = null;
@@ -392,7 +393,7 @@ function CheckAnswer() {
 function Scoring() {
   // If correct result, the score increase
   if (result == true) {
-    score = score + 1 * healthMultiplicator * difficulty;
+    score = score + 1 * healthMultiplicator * difficulty * clockMultiplicator;
 
     streak++;
     level++;
@@ -456,8 +457,10 @@ function Health() {
   }
 
   healthMultiplicator = 6 - baseHealth;
+}
 
-  // Display the hearts
+// Display the hearts
+function DisplayHearts() {
   for (let i = 5; i > health; i--) {
     _health.children[i - 1].classList.remove("redHeart");
     _health.children[i - 1].classList.remove("blueHeart");
@@ -483,10 +486,25 @@ function Health() {
 function InitClock() {
   if (clock == true) {
     StartClock();
+    clockMultiplicator = 2;
   }
   if (clock == false) {
     EndClock();
+    clockMultiplicator = 1;
   }
+}
+
+function DamageClock() {
+  // If no bonus hp, loose a hp
+  if (bonusHealth == 0) {
+    health--;
+  }
+  // If bonus hp, loose one
+  if (bonusHealth > 0) {
+    bonusHealth--;
+  }
+
+  DisplayHearts();
 }
 
 function StartClock() {
@@ -596,10 +614,11 @@ function Init() {
   health = baseHealth;
   bonusHealth = 0;
 
+  clock = false;
+  clockMultiplicator = 1;
+
   result = null;
   healthMultiplicator = 1;
-
-  clock = false;
 
   _score.innerHTML = "Score : " + score;
   _bestScore.innerHTML = "Best Score : " + bestScore;
@@ -611,6 +630,7 @@ function Init() {
 Init();
 InitClock();
 Health();
+DisplayHearts();
 Difficulty();
 Calculs();
 
@@ -624,6 +644,7 @@ _playerAnswer.addEventListener("keydown", (e) => {
     CheckAnswer();
     ResetClock();
     Health();
+    DisplayHearts();
     Scoring();
     Calculs();
 
@@ -640,6 +661,10 @@ _clockBtn.addEventListener("click", (e) => {
   } else {
     StartClock();
   }
+});
+
+_needle.addEventListener("animationiteration", (e) => {
+  DamageClock();
 });
 
 //#endregion
