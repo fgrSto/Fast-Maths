@@ -46,7 +46,7 @@ let baseHealth = null;
 let health = null;
 let bonusHealth = null;
 
-let clockOn = null;
+let clock = null;
 
 let result = null;
 let healthMultiplicator = null;
@@ -478,6 +478,37 @@ function Health() {
 
 //#endregion
 
+//#region Clock
+
+function InitClock() {
+  if (clock == true) {
+    StartClock();
+  }
+  if (clock == false) {
+    EndClock();
+  }
+}
+
+function StartClock() {
+  _needle.classList.add("rotate");
+  _clockBtn.innerHTML = "Clock on";
+  clock = true;
+}
+
+function EndClock() {
+  _needle.classList.remove("rotate");
+  _clockBtn.innerHTML = "Clock off";
+  clock = false;
+}
+
+function ResetClock() {
+  _needle.style.animation = "none";
+  _needle.offsetHeight;
+  _needle.style.animation = null;
+}
+
+//#endregion
+
 //#region Difficulty
 
 function Difficulty() {
@@ -568,7 +599,7 @@ function Init() {
   result = null;
   healthMultiplicator = 1;
 
-  clockOn = false;
+  clock = false;
 
   _score.innerHTML = "Score : " + score;
   _bestScore.innerHTML = "Best Score : " + bestScore;
@@ -578,16 +609,20 @@ function Init() {
 }
 
 Init();
+InitClock();
 Health();
 Difficulty();
 Calculs();
 
 //#endregion
 
+//#region Inputs
+
 // Execute function when player give answer
 _playerAnswer.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     CheckAnswer();
+    ResetClock();
     Health();
     Scoring();
     Calculs();
@@ -596,3 +631,15 @@ _playerAnswer.addEventListener("keydown", (e) => {
     _playerAnswer.value = null;
   }
 });
+
+// Execute function when player hit the clock button
+_clockBtn.addEventListener("click", (e) => {
+  if (clock == true) {
+    EndClock();
+    _clockBtn.innerHTML = "Paused";
+  } else {
+    StartClock();
+  }
+});
+
+//#endregion
