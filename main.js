@@ -374,15 +374,18 @@ function Calculs() {
 
 //#endregion
 
-//#region Checking answer
+//#region Read answer
 
-function CheckAnswer() {
+function ReadAnswer() {
   playerAnswer = _playerAnswer.value;
   if (answer == playerAnswer) {
     result = true;
   }
   if (answer != playerAnswer) {
     result = false;
+  }
+  if (playerAnswer.toLowerCase() == "d") {
+    result = true;
   }
 }
 
@@ -435,18 +438,23 @@ function Scoring() {
 
 //#region Health
 
-function Health() {
-  // If the result is wrong, loose a hp
-  if (result == false) {
-    // If no bonus hp, loose a hp
-    if (bonusHealth == 0) {
-      health--;
-    }
-    // If bonus hp, loose one
-    if (bonusHealth > 0) {
-      bonusHealth--;
+function Damage() {
+  if (bonusHealth > 0) {
+    bonusHealth--;
+  } else {
+    health--;
+  }
+}
+
+function LifeBlood() {
+  if (health + bonusHealth < baseHealth) {
+    if (streak % 10 == 0) {
+      bonusHealth++;
     }
   }
+}
+
+function Health() {
   // Every 10 correct result in a row, gain a bonus hp
   if ((streak + 1) % 10 == 0) {
     bonusHealth++;
@@ -636,12 +644,12 @@ Calculs();
 
 //#endregion
 
-//#region Inputs
+//#region Trigger
 
 // Execute function when player give answer
 _playerAnswer.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
-    CheckAnswer();
+    ReadAnswer();
     ResetClock();
     Health();
     DisplayHearts();
